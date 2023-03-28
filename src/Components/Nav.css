@@ -1,1 +1,23 @@
-
+.navbarlinks {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: blue;
+    height: 100px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .navbarlinks li {
+    margin: 0 30px;
+  }
+  
+  .navbarlinks li a {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    line-height: 100px;
+  }
+  
+  
