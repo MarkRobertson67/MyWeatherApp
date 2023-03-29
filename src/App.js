@@ -8,7 +8,6 @@ import Map from "./Components/Map";
 import About from "./Components/About";
 
 
-
 function App() {
 
   const [weatherData, setWeatherData] = useState(null);
