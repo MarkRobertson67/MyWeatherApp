@@ -1,23 +1,66 @@
+.navbar {
+  height: 100px;
+  background-color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
 .navbarlinks {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: blue;
-    height: 100px;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .navbarlinks li {
-    margin: 0 30px;
-  }
-  
-  .navbarlinks li a {
-    color: white;
-    text-decoration: none;
-    font-size: 24px;
-    line-height: 100px;
-  }
-  
+  list-style-type: none;
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex: 1;
+}
+
+.navbarlinks li a {
+  color: #f2f2f2;
+  font-size: 30px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.form-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.form-container input[type="text"] {
+  font-size: 30px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.form-container input[type="text"]::placeholder {
+  font-size: 30px;
+  color: #f2f2f2;
+}
+
+.form-container button[type="submit"] {
+  font-size: 30px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-container button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.form-container input {
+  font-size: 30px;
+  color: black;
+}
+
+
   
