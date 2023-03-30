@@ -4,10 +4,23 @@ import "./Home.css"
 
 function Home({ weatherData, onLocationSubmit }) {
 
+    const [search, setSearch] = useState("");
     const [conversionResult, setConversionResult] = useState(null);
     const [searchHistory, setSearchHistory] = useState([]);
     const [locationInput, setLocationInput] = useState("");
     const [searchResults, setSearchResults] = useState([]);
+
+    function getImageSrc(weather) {
+        if (weather.weather[0].hourly[0].chanceofsunshine > 50) {
+          return "./assets/icons8-summer.gif";
+        } else if (weather.weather[0].hourly[0].chanceofrain > 50) {
+          return "./assets/icons8-torrential-rain.gif";
+        } else if (weather.weather[0].hourly[0].chanceofsnow > 50) {
+          return "./assets/icons8-light-snow.gif";
+        }
+        return "No image"; // Return empty string if none of the conditions match
+      }
+
 
     const handleConversionSubmit = (event) => {
         event.preventDefault();
@@ -17,20 +30,32 @@ function Home({ weatherData, onLocationSubmit }) {
           ? ((conversionValue - 32) * 5) / 9
           : conversionValue * (9 / 5) + 32;
         setConversionResult({ value: result.toFixed(2), isToCelsius });
+        setSearch("");
+        
       };
 
       const handleSubmit = (event) => {
         event.preventDefault();
+        
         const query = locationInput.trim();
-        if (query) {
-          onLocationSubmit(query);
-          setLocationInput("");
-      
-          if (searchResults.length === 0) {
-            setSearchResults([{ query, data: null }]);
-          }
+        if (!query) {
+          return;
         }
+        
+        onLocationSubmit(query);
+        setLocationInput("");
+        
+        setSearchResults((prevSearchResults) => {
+          const existingSearchIndex = prevSearchResults.findIndex(
+            (searchResult) => searchResult.query === query
+          );
+          if (existingSearchIndex !== -1) {
+            prevSearchResults.splice(existingSearchIndex, 1);
+          }
+          return [{ query, data: weatherData }, ...prevSearchResults].slice(0, 10);
+        });
       };
+      
       
       
       const handleSearchHistoryClick = (search) => {
@@ -53,15 +78,14 @@ function Home({ weatherData, onLocationSubmit }) {
           
       useEffect(() => {
         if (searchResults.length > 0) {
-          // Limit search history to 10 most recent searches
-          setSearchHistory(searchResults.slice(-10));
+          setSearchHistory(searchResults);
         }
       }, [searchResults]);
 
 
     return (
     <div className="container">
-      <header className="header">Weather App</header>
+      <header className="header"></header>
       <main className="main-container">
       <section className="left-container">
           <h2>Convert Temperature</h2>
@@ -73,18 +97,21 @@ function Home({ weatherData, onLocationSubmit }) {
             <label>
               <input type="radio" name="conversionType" value="toFahrenheit" />
               Celsius to Fahrenheit
+              <br></br><br></br>
             </label>
-            <input type="number" name="convert" />
-            <button type="submit">Convert</button>
+            <input type="number" name="convert" style={{ fontSize: "25px" }}value={search}
+          onChange={(event) => setSearch(event.target.value)}/>
+            <button type="submit" style={{ fontSize: "25px" }}>Convert</button>
+
           </form>
           {conversionResult && (
-            <div>
+            <div className="convResults">
               <p>
                 {conversionResult.isToCelsius
                   ? `${conversionResult.value}°C`
                   : `${conversionResult.value}°F`}
               </p>
-              <button onClick={() => setConversionResult(null)}>
+              <button style={{ fontSize: "25px" }}onClick={() => setConversionResult(null)}>
                 Clear Conversion
               </button>
             </div>
@@ -93,16 +120,18 @@ function Home({ weatherData, onLocationSubmit }) {
 
         <section className="center-container">
         <form className="form-container" onSubmit={handleSubmit}>
+        <div className="input-container">
           <input
-          style={{ fontSize: "30px", backgroundColor: "white", color: "black" }}
           id="location"
           type="text"
           name="location"
+          label="Imput Location"
           value={locationInput}
-          placeholder="Pick a Location"
+        //   placeholder ="Pick a Location" style={{ fontSize: "30px", backgroundColor: "white", color: "black" }}
           onChange={(event) => setLocationInput(event.target.value)}
         />
-        <button className="form-button" type="submit">Get Weather</button>
+        <button className="form-button" type="submit" >Get Weather</button>
+        </div>
         </form>
 
           {weatherData && (
@@ -113,6 +142,7 @@ function Home({ weatherData, onLocationSubmit }) {
               <p>Region: {weatherData.nearest_area[0].region[0].value}</p>
               <p>Country: {weatherData.nearest_area[0].country[0].value}</p>
               <p>Current temperature: {weatherData.current_condition[0].temp_F}°F</p>
+              <img src={getImageSrc(weatherData)} alt="weather" />
               <ul>
 
               <div className="forecast-container">

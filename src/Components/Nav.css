@@ -2,7 +2,7 @@
   height: 100px;
   background-color: #333;
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   padding: 0 20px;
 }
@@ -11,9 +11,13 @@
   list-style-type: none;
   margin: 0;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   flex: 1;
+}
+
+.navbarlinks li:first-child {
+  margin-right: auto;
 }
 
 .navbarlinks li a {
@@ -23,44 +27,11 @@
   text-decoration: none;
 }
 
-.form-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+.about-link {
+  float: right;
   margin-right: 20px;
 }
-
-.form-container input[type="text"] {
-  font-size: 30px;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  margin-right: 10px;
+.navbarlinks li:first-child {
+  margin-right: auto;
+  margin-left: auto;
 }
-
-.form-container input[type="text"]::placeholder {
-  font-size: 30px;
-  color: #f2f2f2;
-}
-
-.form-container button[type="submit"] {
-  font-size: 30px;
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  border: none;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.form-container button[type="submit"]:hover {
-  background-color: #45a049;
-}
-
-.form-container input {
-  font-size: 30px;
-  color: black;
-}
-
-
-  
