@@ -9,15 +9,15 @@ function Nav() {
       <ul className="navbarlinks">
 
       <li>
-          <Link to="/">Home</Link>
+      <Link to="/" className="weather-app-link">Weather App</Link>
         </li>
 
-        <li>
+        {/* <li>
           <Link to="/map">Map</Link>
-        </li>
+        </li> */}
 
         <li>
-          <Link to="/about">About</Link>
+        <Link to="/about" className="about-link">About</Link>
         </li>
       </ul>
 

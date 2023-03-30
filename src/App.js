@@ -31,7 +31,7 @@ function App() {
           path="/"
           element={<Home weatherData={weatherData} onLocationSubmit={handleLocationSubmit} />}
         />
-        <Route path="/map" element={<Map />} />
+        {/* <Route path="/map" element={<Map />} /> */}
         <Route path="/about" element={<About />} />
       </Routes>
     </div>
