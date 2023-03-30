@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import "./Home.css"
 
+
 function Home({ weatherData, onLocationSubmit }) {
 
     const [search, setSearch] = useState("");
@@ -12,13 +13,13 @@ function Home({ weatherData, onLocationSubmit }) {
 
     function getImageSrc(weather) {
         if (weather.weather[0].hourly[0].chanceofsunshine > 50) {
-          return "./assets/icons8-summer.gif";
+          return "./icons8-summer.gif";
         } else if (weather.weather[0].hourly[0].chanceofrain > 50) {
-          return "./assets/icons8-torrential-rain.gif";
+          return "./icons8-torrential-rain.gif";
         } else if (weather.weather[0].hourly[0].chanceofsnow > 50) {
-          return "./assets/icons8-light-snow.gif";
+          return "./icons8-light-snow.gif";
         }
-        return "No image"; // Return empty string if none of the conditions match
+        return "./spring.jpeg";
       }
 
 
@@ -178,9 +179,9 @@ function Home({ weatherData, onLocationSubmit }) {
               {searchHistory.map((search, index) => (
                 <li key={index} onClick={() => handleSearchHistoryClick(search)}>
                   {search.query}
-                  {index !== searchHistory.length - 1 ? ", " : ""}
+                  {index !== searchHistory.length - 1 ? " " : ""}
                   {searchResults[index]?.data?.current_condition &&
-      <span> - {searchResults[index].data.current_condition[0].temp_F}°F</span>
+      <span> {searchResults[index].data.current_condition[0].temp_F}°F</span>
     }
                 </li>
               ))}
