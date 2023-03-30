@@ -12,23 +12,29 @@ function App() {
 
   const [weatherData, setWeatherData] = useState(null);
 
-  const handleLocationSubmit = (location) => {
-    fetch(`https://wttr.in/${location}?format=j1`)
-      .then((response) => response.json())
-      .then((data) => setWeatherData(data));
+  const handleLocationSubmit = async (location) => {
+    try {
+      const response = await fetch(`https://wttr.in/${location}?format=j1`);
+      const data = await response.json();
+      setWeatherData(data);
+    } catch (error) {
+      console.error("Error fetching weather data: ", error);
+    }
   };
-
+  
 
   return (
     <div className="App">
-      <Nav onLocationSubmit={handleLocationSubmit} />
+      <Nav />
       <Routes>
-        <Route path="/" element={<Home weatherData={weatherData}/>} />
+        <Route
+          path="/"
+          element={<Home weatherData={weatherData} onLocationSubmit={handleLocationSubmit} />}
+        />
         <Route path="/map" element={<Map />} />
         <Route path="/about" element={<About />} />
-        </Routes>
+      </Routes>
     </div>
   );
 }
-
 export default App;
