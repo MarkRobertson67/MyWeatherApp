@@ -1,9 +1,10 @@
 
 import "./App.css";
-import { BrowserRouter as Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import Nav from "./Components/Nav";
 import Home from "./Components/Home";
+
 import About from "./Components/About";
 
 
@@ -24,6 +25,7 @@ function App() {
 
   return (
     <div className="App">
+      <Router>
       <Nav />
       <Routes>
         <Route
@@ -33,6 +35,7 @@ function App() {
         {/* <Route path="/map" element={<Map />} /> */}
         <Route path="/about" element={<About />} />
       </Routes>
+      </Router>
     </div>
   );
 }
