@@ -133,7 +133,7 @@ function Home({ weatherData, onLocationSubmit }) {
               <img src={getImageSrc(weatherData)} alt="weather" />
               <ul>
 
-        <div className="forecast-container">
+            <div className="forecast-container">
             {weatherData.weather.map((forecast, index) => {
              if (index < 3) { // Display forecast for next 3 days
             return (
@@ -142,18 +142,18 @@ function Home({ weatherData, onLocationSubmit }) {
             <p className="forecast-maxtemp">Max temp: {forecast.maxtempF}°F</p>
             <p className="forecast-mintemp">Min temp: {forecast.mintempF}°F</p>
             <p className="forecast-description">Weather description: {forecast.hourly[0].weatherDesc[0].value}</p>
-        </div>
-      );
-    } else {
-      return null;
-    }
-  })}
-</div>
-
-    </ul>
             </div>
-          )}
-        </section>
+         );
+        } else {
+         return null;
+        }
+  } )}
+    </div>
+    </ul>
+    </div>
+    )}
+    </section>
+
 
         <section className="right-container">
           <h2>Search History</h2>
@@ -165,7 +165,7 @@ function Home({ weatherData, onLocationSubmit }) {
                 <li className="rightLi" key={search.index} onClick={() => handleSearchHistoryClick(search)}>
                   {search.query}
                   {index !== searchHistory.length - 1 ? " " : ""}
-                  {searchResults[index]?.data?.current_condition &&
+                  {searchResults[index].data?.current_condition &&
                     <span> {searchResults[index].data.current_condition[0].temp_F}°F</span>
                     }
                 </li>
