@@ -32,12 +32,11 @@ function Home({ weatherData, onLocationSubmit }) {
           : conversionValue * (9 / 5) + 32;
         setConversionResult({ value: result.toFixed(2), isToCelsius });
         setSearch("");
-        
       };
 
+      
       const handleSubmit = (event) => {
         event.preventDefault();
-        
         const query = locationInput.trim();
         if (!query) {
           return;
@@ -47,34 +46,21 @@ function Home({ weatherData, onLocationSubmit }) {
         setLocationInput("");
         
         setSearchResults((prevSearchResults) => {
-          const existingSearchIndex = prevSearchResults.findIndex(
-            (searchResult) => searchResult.query === query
-          );
-          if (existingSearchIndex !== -1) {
-            prevSearchResults.splice(existingSearchIndex, 1);
-          }
-          return [{ query, data: weatherData }, ...prevSearchResults].slice(0, 10);
-        });
-      };
-      
+            const existingSearchIndex = prevSearchResults.findIndex(
+              (searchResult) => searchResult.query === query
+            );
+            if (existingSearchIndex !== -1) {
+              prevSearchResults.splice(existingSearchIndex, 1);
+            }
+            return [{ query, data: weatherData }, ...prevSearchResults].slice(0, 10);
+          });
+          setLocationInput("");
+        };
       
       
       const handleSearchHistoryClick = (search) => {
         onLocationSubmit(search.query);
       };
-
-      useEffect(() => {
-        if (weatherData && locationInput.trim()) {
-          setSearchResults((prevSearchResults) => {
-            const isDuplicate = prevSearchResults.some(searchResult => searchResult.query === locationInput.trim());
-            if (!isDuplicate) {
-              const updatedSearchResults = [...prevSearchResults, { query: locationInput.trim(), data: weatherData }];
-              return updatedSearchResults.slice(-10);
-            }
-            return prevSearchResults;
-          });
-        }
-      }, [weatherData, locationInput]);
       
           
       useEffect(() => {
