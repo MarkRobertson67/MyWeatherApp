@@ -4,6 +4,7 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  cursor: pointer;
 }
 
 .header {
@@ -75,16 +76,19 @@ button:hover {
 }
 
 .history-container {
+  cursor: pointer;
   margin-top: 2rem;
 }
 
 .history-list {
+  cursor: pointer;
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
 .history-list-item {
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -111,6 +115,7 @@ button:hover {
   .right-container {
     margin: 1rem 0;
     margin-left: 20px;
+    cursor: pointer;
   }
 
   .left-container {
@@ -248,6 +253,10 @@ input[type="text"] {
   color: black;
 }
 
+.history-list-item:hover {
+  cursor: pointer;
+  background-color: #f2f2f2;
+}
 
 /* .form-container {
   display: flex;
