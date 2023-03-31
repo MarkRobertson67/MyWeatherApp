@@ -10,6 +10,7 @@ function Home({ weatherData, onLocationSubmit }) {
     const [searchHistory, setSearchHistory] = useState([]);
     const [locationInput, setLocationInput] = useState("");
     const [searchResults, setSearchResults] = useState([]);
+    
 
     function getImageSrc(weather) {
         if (weather.weather[0].hourly[0].chanceofsunshine > 50) {
@@ -37,14 +38,13 @@ function Home({ weatherData, onLocationSubmit }) {
       
       const handleSubmit = (event) => {
         event.preventDefault();
-
         const query = locationInput.trim();
         if (!query) {
           return;
         }
 
         onLocationSubmit(query);
-        
+
         setSearchResults((prevSearchResults) => {
             const existingSearchIndex = prevSearchResults.findIndex(
               (searchResult) => searchResult.query === query
@@ -54,6 +54,7 @@ function Home({ weatherData, onLocationSubmit }) {
             }
             return [{ query, data: weatherData }, ...prevSearchResults].slice(0, 10);
           });
+          
           setLocationInput("");
         };
       
@@ -114,7 +115,7 @@ function Home({ weatherData, onLocationSubmit }) {
           name="location"
           label="Imput Location"
           value={locationInput}
-        //   placeholder ="Pick a Location" style={{ fontSize: "30px", backgroundColor: "white", color: "black" }}
+          placeholder ="Pick a Location" 
           onChange={(event) => setLocationInput(event.target.value)}
         />
         <button className="form-button" type="submit" >Get Weather</button>
@@ -132,15 +133,15 @@ function Home({ weatherData, onLocationSubmit }) {
               <img src={getImageSrc(weatherData)} alt="weather" />
               <ul>
 
-              <div className="forecast-container">
-  {weatherData.weather.map((forecast, index) => {
-    if (index < 3) { // Display forecast for next 3 days
-      return (
-        <div className="forecast-item" key={index}>
-          <p className="forecast-day">{index === 0 ? "Today" : index === 1 ? "Tomorrow" : "The day after tomorrow"}</p>
-          <p className="forecast-maxtemp">Max temp: {forecast.maxtempF}°F</p>
-          <p className="forecast-mintemp">Min temp: {forecast.mintempF}°F</p>
-          <p className="forecast-description">Weather description: {forecast.hourly[0].weatherDesc[0].value}</p>
+        <div className="forecast-container">
+            {weatherData.weather.map((forecast, index) => {
+             if (index < 3) { // Display forecast for next 3 days
+            return (
+            <div className="forecast-item" key={index}>
+            <p className="forecast-day">{index === 0 ? "Today" : index === 1 ? "Tomorrow" : "The day after tomorrow"}</p>
+            <p className="forecast-maxtemp">Max temp: {forecast.maxtempF}°F</p>
+            <p className="forecast-mintemp">Min temp: {forecast.mintempF}°F</p>
+            <p className="forecast-description">Weather description: {forecast.hourly[0].weatherDesc[0].value}</p>
         </div>
       );
     } else {
@@ -149,9 +150,7 @@ function Home({ weatherData, onLocationSubmit }) {
   })}
 </div>
 
-
-</ul>
-
+    </ul>
             </div>
           )}
         </section>
@@ -163,12 +162,12 @@ function Home({ weatherData, onLocationSubmit }) {
           ) : (
             <ul>
               {searchHistory.map((search, index) => (
-                <li key={index} onClick={() => handleSearchHistoryClick(search)}>
+                <li className="rightLi" key={search.index} onClick={() => handleSearchHistoryClick(search)}>
                   {search.query}
                   {index !== searchHistory.length - 1 ? " " : ""}
                   {searchResults[index]?.data?.current_condition &&
-      <span> {searchResults[index].data.current_condition[0].temp_F}°F</span>
-    }
+                    <span> {searchResults[index].data.current_condition[0].temp_F}°F</span>
+                    }
                 </li>
               ))}
             </ul>

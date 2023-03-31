@@ -9,7 +9,7 @@ function Nav() {
       <ul className="navbarlinks">
 
       <li>
-      <Link to="/" className="weather-app-link">Weather App</Link>
+      <Link to="/" className="weather-app-link"><h1>Weather App</h1></Link>
         </li>
 
         {/* <li>

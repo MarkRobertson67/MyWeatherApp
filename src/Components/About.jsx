@@ -20,14 +20,15 @@ The Home component is the default page of the app and displays the weather forec
     Being a Pursuit Fellow will give me the foundation to go on and learn new and exciting languages such as Python, C++, C# et al. that I would like to use both personally and professionally. My first personal project will be to design and implement a quantitative trading algorithm that I can run through an API to a trading platform.
     
     I would very much enjoy working for a start-up (as I have start-up experience) or even a large financial firm, as my experience up until Pursuit has been in the financial markets.
-        </p>
+        </p><br></br>
         <a
         href="https://github.com/MarkRobertson67"
         target="_blank"
         rel="noopener noreferrer"
         >
-        Github
-        </a>
+        Github  
+        </a> <br></br>
+        <img src={"./github-mark.png"} alt="react logo" width={40} height={40} />
         </main>
     )
 }
