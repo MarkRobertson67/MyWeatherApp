@@ -1,10 +1,9 @@
 
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import Nav from "./Components/Nav";
 import Home from "./Components/Home";
-import Map from "./Components/Map";
 import About from "./Components/About";
 
 
