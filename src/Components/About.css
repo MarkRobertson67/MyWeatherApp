@@ -1,4 +1,3 @@
-
 .about {
     margin: 50px;
     padding: 20px;
@@ -7,13 +6,13 @@
     }
     
     .about h1 {
-    font-size: 24px;
+    font-size: 34px;
     font-weight: bold;
     margin-bottom: 10px;
     }
     
     .about p {
-    font-size: 18px;
+    font-size: 28px;
     line-height: 1.5;
     margin-bottom: 20px;
     }
@@ -31,3 +30,11 @@
     .about a:hover {
     background-color: #0056b3;
     }
+
+    .github-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      

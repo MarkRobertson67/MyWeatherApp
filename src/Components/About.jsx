@@ -1,12 +1,11 @@
 
-
 import "./About.css"
 
 function About() {
 
     return (
         <main className="about"> 
-        <h1>About Our Project</h1>
+        <h1>About the Project</h1>
         <p>This is a Weather App built with React, which allows users to check the weather forecast for a specific location. It uses the useState hook to manage state, the react-router-dom library for routing, and the fetch method to get data from the wttr.in API.
 
 The main component of the app is the App function, which sets up the navigation and routing for the app, and defines the state for weather data. When the user submits a location using the form in the Home component, the handleLocationSubmit function is called to fetch the weather data and update the state.
@@ -20,15 +19,16 @@ The Home component is the default page of the app and displays the weather forec
     Being a Pursuit Fellow will give me the foundation to go on and learn new and exciting languages such as Python, C++, C# et al. that I would like to use both personally and professionally. My first personal project will be to design and implement a quantitative trading algorithm that I can run through an API to a trading platform.
     
     I would very much enjoy working for a start-up (as I have start-up experience) or even a large financial firm, as my experience up until Pursuit has been in the financial markets.
-        </p><br></br>
+        </p><br></br><div className="github-container">
         <a
-        href="https://github.com/MarkRobertson67"
-        target="_blank"
-        rel="noopener noreferrer"
+          href="https://github.com/MarkRobertson67"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-        Github  
-        </a> <br></br>
-        <img src={"./github-mark.png"} alt="react logo" width={40} height={40} />
+          Github
+        </a>
+        <img src={"./github-mark.png"} alt="GitHub Logo" width={40} height={40} />
+      </div>
         </main>
     )
 }
