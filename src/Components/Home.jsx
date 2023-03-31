@@ -42,7 +42,6 @@ function Home({ weatherData, onLocationSubmit }) {
         if (!query) {
           return;
         }
-        const searchResult = { query, data: null };
 
         onLocationSubmit(query);
         
@@ -58,12 +57,12 @@ function Home({ weatherData, onLocationSubmit }) {
           setLocationInput("");
         };
       
-      
+
       const handleSearchHistoryClick = (search) => {
         onLocationSubmit(search.query);
       };
       
-          
+
       useEffect(() => {
         if (searchResults.length > 0) {
           setSearchHistory(searchResults);
