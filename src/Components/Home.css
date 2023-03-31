@@ -40,8 +40,12 @@
 }
 
 .left-container h2 {
-  margin-top: 0;
+  margin-top: 10;
   text-align: center;
+}
+
+.rightLi {
+  list-style: none;
 }
 
 form {
@@ -136,7 +140,7 @@ button:hover {
   justify-content: center;
   flex-wrap: wrap;
   /* background-color: #f2f2f2; */
-  padding: 10px;
+  /* padding: 10px; */
   border-radius: 5px;
 }
 
@@ -150,18 +154,8 @@ button:hover {
   width: 22%;
   max-width: 300px;
   margin-right: 20px;
-  /* margin-bottom: 10px; */
+  margin-bottom: 10px;
   background-color: #fff;
-}
-
-.forecast-title {
-  text-align: center;
-  font-size: 1.3em;
-  font-weight: bold;
-  color: #fff;
-  background-color: #333;
-  padding: 10px;
-  border-radius: 5px 5px 0 0;
 }
 
 .forecast-day {
@@ -170,18 +164,6 @@ button:hover {
   margin-bottom: 10px;
 }
 
-.forecast-temp {
-  margin: 10px 0;
-}
-
-.forecast-desc {
-  font-style: italic;
-}
-.input-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 input[type="text"] {
   width: 250px;
   outline: 2px solid blue;
@@ -212,14 +194,13 @@ input[type="text"] {
 .left-container {
   text-align: center;
   font-size: 25px;
+  
 }
 
-.conversionform {
+.right-container {
   text-align: center;
   font-size: 25px;
 }
-
-
 
 .form-container input[type="text"] {
   font-size: 30px;
@@ -227,11 +208,6 @@ input[type="text"] {
   border: none;
   border-radius: 5px;
   margin-right: 10px;
-}
-
-.form-container input[type="text"]::placeholder {
-  font-size: 30px;
-  color: #f2f2f2;
 }
 
 .form-container button[type="submit"] {
@@ -243,30 +219,3 @@ input[type="text"] {
   border-radius: 5px;
   cursor: pointer;
 }
-
-.form-container button[type="submit"]:hover {
-  background-color: #45a049;
-}
-
-.form-container input {
-  font-size: 30px;
-  color: black;
-}
-
-.history-list-item:hover {
-  cursor: pointer;
-  background-color: #f2f2f2;
-}
-
-/* .form-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-right: 20px;
-} */
-
-
-
-
-
-
