@@ -37,13 +37,14 @@ function Home({ weatherData, onLocationSubmit }) {
       
       const handleSubmit = (event) => {
         event.preventDefault();
+
         const query = locationInput.trim();
         if (!query) {
           return;
         }
-        
+        const searchResult = { query, data: null };
+
         onLocationSubmit(query);
-        setLocationInput("");
         
         setSearchResults((prevSearchResults) => {
             const existingSearchIndex = prevSearchResults.findIndex(
