@@ -8,13 +8,14 @@ import About from "./Components/About";
 
 function App() {
 
-  const [weatherData, setWeatherData] = useState(null);
+  const [weatherData, setWeatherData] = useState();
 
   const handleLocationSubmit = async (location) => {
     try {
       const response = await fetch(`https://wttr.in/${location}?format=j1`);
       const data = await response.json();
       setWeatherData(data);
+      return data; // Return the weather data from the API call
     } catch (error) {
       console.error("Error fetching weather data: ", error);
     }
