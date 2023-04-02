@@ -1,182 +1,83 @@
-
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./Home.css"
-
+import TemperatureConverter from "./TemperatureConverter"
+import WeatherImages from "./WeatherImages";
+import WeatherForecast from "./WeatherForecast";
+import CurrentWeather from "./CurrentWeather";
+import SearchHistory from "./SearchHistory";
 
 function Home({ weatherData, onLocationSubmit }) {
-
-    const [search, setSearch] = useState("");
-    const [conversionResult, setConversionResult] = useState(null);
     const [searchHistory, setSearchHistory] = useState([]);
     const [locationInput, setLocationInput] = useState("");
     const [searchResults, setSearchResults] = useState([]);
-    
+  
 
-    function getImageSrc(weather) {
-        if (weather.weather[0].hourly[0].chanceofsunshine > 50) {
-          return "./icons8-summer.gif";
-        } else if (weather.weather[0].hourly[0].chanceofrain > 50) {
-          return "./icons8-torrential-rain.gif";
-        } else if (weather.weather[0].hourly[0].chanceofsnow > 50) {
-          return "./icons8-light-snow.gif";
-        }
-        return "./spring.jpeg";
-      }
-
-
-    const handleConversionSubmit = (event) => {
-        event.preventDefault();
-        const conversionValue = event.target.convert.value;
-        const isToCelsius = event.target.conversionType.value === "toCelsius";
-        const result = isToCelsius
-          ? ((conversionValue - 32) * 5) / 9
-          : conversionValue * (9 / 5) + 32;
-        setConversionResult({ value: result.toFixed(2), isToCelsius });
-        setSearch("");
-      };
-
-      
-      const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const query = locationInput.trim();
         if (!query) {
           return;
         }
-
-        onLocationSubmit(query);
-
-        setSearchResults((prevSearchResults) => {
-            const existingSearchIndex = prevSearchResults.findIndex(
-              (searchResult) => searchResult.query === query
-            );
-            if (existingSearchIndex !== -1) {
-              prevSearchResults.splice(existingSearchIndex, 1);
-            }
-            return [{ query, data: weatherData }, ...prevSearchResults].slice(0, 10);
-          });
-          
-          setLocationInput("");
-        };
+        // Call the onLocationSubmit function passed from parent component to get weather data for the location
+        const weatherData = await onLocationSubmit(query);
+        // Add a new search result to search history and update search results
+        const newSearchResult = { query, data: weatherData };
+        setSearchHistory([newSearchResult, ...searchHistory].slice(0, 10));
+        setSearchResults([newSearchResult, ...searchResults]
+          .filter((_, index) => index < 10)
+        );
+        
+        setLocationInput("");
+      };
       
-
+    //   To handle search history clicks. Call the onLocationSubmit function passed from parent component to get weather data for the selected location
       const handleSearchHistoryClick = (search) => {
         onLocationSubmit(search.query);
       };
-      
-
-      useEffect(() => {
-        if (searchResults.length > 0) {
-          setSearchHistory(searchResults);
-        }
-      }, [searchResults]);
-
-
+    
+  
     return (
-    <div className="container">
-      <header className="header"></header>
-      <main className="main-container">
-      <section className="left-container">
-          <h2>Convert Temperature</h2>
-          <form id="conversionForm" onSubmit={handleConversionSubmit}>
-            <label>
-              <input type="radio" name="conversionType" value="toCelsius" />
-              Fahrenheit to Celsius
-            </label>
-            <label>
-              <input type="radio" name="conversionType" value="toFahrenheit" />
-              Celsius to Fahrenheit
-              <br></br><br></br>
-            </label>
-            <input type="number" name="convert" style={{ fontSize: "25px" }}value={search}
-          onChange={(event) => setSearch(event.target.value)}/>
-            <button type="submit" style={{ fontSize: "25px" }}>Convert</button>
-
-          </form>
-          {conversionResult && (
-            <div className="convResults">
-              <p>
-                {conversionResult.isToCelsius
-                  ? `${conversionResult.value}°C`
-                  : `${conversionResult.value}°F`}
-              </p>
-              <button style={{ fontSize: "25px" }}onClick={() => setConversionResult(null)}>
-                Clear Conversion
-              </button>
-            </div>
-          )}
-        </section>
-
-        <section className="center-container">
-        <form className="form-container" onSubmit={handleSubmit}>
-        <div className="input-container">
-          <input
-          id="location"
-          type="text"
-          name="location"
-          label="Imput Location"
-          value={locationInput}
-          placeholder ="Pick a Location" 
-          onChange={(event) => setLocationInput(event.target.value)}
-        />
-        <button className="form-button" type="submit" >Get Weather</button>
-        </div>
-        </form>
-
-          {weatherData && (
-            <div>
-              <h1>{weatherData.nearest_area[0].areaName[0].value}</h1>
-              <p>Currently: Feels like {weatherData.current_condition[0].FeelsLikeF}°F</p>
-              <p>Area: {weatherData.nearest_area[0].areaName[0].value}</p>
-              <p>Region: {weatherData.nearest_area[0].region[0].value}</p>
-              <p>Country: {weatherData.nearest_area[0].country[0].value}</p>
-              <p>Current temperature: {weatherData.current_condition[0].temp_F}°F</p>
-              <img src={getImageSrc(weatherData)} alt="weather" />
-              <ul>
-
-            <div className="forecast-container">
-            {weatherData.weather.map((forecast, index) => {
-             if (index < 3) { // Display forecast for next 3 days
-            return (
-            <div className="forecast-item" key={index}>
-            <p className="forecast-day">{index === 0 ? "Today" : index === 1 ? "Tomorrow" : "The day after tomorrow"}</p>
-            <p className="forecast-maxtemp">Max temp: {forecast.maxtempF}°F</p>
-            <p className="forecast-mintemp">Min temp: {forecast.mintempF}°F</p>
-            <p className="forecast-description">Weather description: {forecast.hourly[0].weatherDesc[0].value}</p>
-            </div>
-         );
-        } else {
-         return null;
-        }
-  } )}
-    </div>
-    </ul>
-    </div>
-    )}
-    </section>
-
-
-        <section className="right-container">
-          <h2>Search History</h2>
-          {searchHistory.length === 0 ? (
-            <p>No recent searches</p>
-          ) : (
-            <ul>
-              {searchHistory.map((search, index) => (
-                <li className="rightLi" key={search.index} onClick={() => handleSearchHistoryClick(search)}>
-                  {search.query}
-                  {index !== searchHistory.length - 1 ? " " : ""}
-                  {searchResults[index].data?.current_condition &&
-                    <span> {searchResults[index].data.current_condition[0].temp_F}°F</span>
-                    }
-                </li>
-              ))}
-            </ul>
-          )}
-        </section>
-      </main>
-    </div>
-  );
-}
+      <div className="container">
+        <header className="header"></header>
+        <main className="main-container">
+          <section className="left-container">
+            <TemperatureConverter />
+          </section>
+  
+          <section className="center-container">
+            <form className="form-container" onSubmit={handleSubmit}>
+              <div className="input-container">
+                <input
+                  id="location"
+                  type="text"
+                  name="location"
+                  label="Input Location"
+                  value={locationInput}
+                  placeholder="Pick a Location"
+                  onChange={(event) => setLocationInput(event.target.value)}
+                />
+                <button className="form-button" type="submit">
+                  Get Weather
+                </button>
+              </div>
+            </form>
+            {weatherData && (
+              <div>
+                <CurrentWeather weatherData={weatherData} />
+                <WeatherImages weatherData={weatherData} />
+                <WeatherForecast forecastData={weatherData.weather} />
+              </div>
+            )}
+          </section>
+  
+          <section className="right-container">
+          <SearchHistory searchHistory={searchHistory} onSearchHistoryClick={handleSearchHistoryClick} />   
+          </section>
+        </main>
+      </div>
+    );
+  }
+  
 export default Home;
 
 
