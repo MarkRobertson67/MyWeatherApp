@@ -31,7 +31,7 @@ function Home({ weatherData, onLocationSubmit }) {
         // Call the onLocationSubmit function passed from parent component to get weather data for the location
         const weatherData = await onLocationSubmit(query);
         // Add a new search result to search history and update search results
-        const newSearchResult = { query, data: weatherData };
+        const newSearchResult = { query: query.charAt(0).toUpperCase() + query.slice(1), data: weatherData };
         setSearchHistory([newSearchResult, ...searchHistory].slice(0, 10));
         setSearchResults([newSearchResult, ...searchResults]
           .filter((_, index) => index < 10)
