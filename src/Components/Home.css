@@ -221,3 +221,7 @@ input[type="text"] {
   border-radius: 5px;
   cursor: pointer;
 }
+
+.weather-images-container {
+  margin-bottom: 20px;
+}

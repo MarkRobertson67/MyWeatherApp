@@ -74,7 +74,9 @@ function Home({ weatherData, onLocationSubmit }) {
             {weatherData && (
               <div>
                 <CurrentWeather weatherData={weatherData} />
+                <div className="weather-images-container">
                 <WeatherImages weatherData={weatherData} />
+                </div>
                 <WeatherForecast forecastData={weatherData.weather} />
               </div>
             )}
