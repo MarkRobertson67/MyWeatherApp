@@ -18,6 +18,16 @@ function Home({ weatherData, onLocationSubmit }) {
         if (!query) {
           return;
         }
+
+         // Check if location already exists in search history
+      const existingIndex = searchHistory.findIndex(
+      (search) => search.query.toLowerCase() === query.toLowerCase()
+      );
+      if (existingIndex >= 0) {
+    // Remove existing search result from search history
+      searchHistory.splice(existingIndex, 1);
+      }
+
         // Call the onLocationSubmit function passed from parent component to get weather data for the location
         const weatherData = await onLocationSubmit(query);
         // Add a new search result to search history and update search results
