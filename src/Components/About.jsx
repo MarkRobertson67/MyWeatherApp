@@ -4,7 +4,7 @@ import "./About.css"
 function About() {
 
   return (
-    <main className="about"> 
+    <main className="about"><br></br><br></br>
       <h1>About the Project</h1>
       <p>
         This is a Weather App built with React, which allows users to check the weather forecast for a specific location. It uses the useState hook to manage state, the react-router-dom library for routing, and the fetch method to get data from the wttr.in API. On its first render, the app will display the weather data for the user's location as you can omit the location name in the API call, and it will return the weather data based on the user's IP address.
